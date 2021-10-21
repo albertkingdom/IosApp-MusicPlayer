@@ -10,7 +10,8 @@ import AVFoundation
 
 class ListViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
-    var player: MusicPlayer?
+    //var player: MusicPlayer?
+    var player =  MusicPlayer.shared
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -42,14 +43,14 @@ extension ListViewController:UITableViewDelegate, UITableViewDataSource{
 
         
         // set songInfo
-        guard let player = player else { return }
+
         player.setSongInfo(songs[indexPath.row]) 
         
         player.currentIndex = indexPath.row
         
         player.replacePlayerItem()
        
-        //player.registerObserve(printTime(info: ))
+
         NotificationCenter.default.post(name: Notification.Name("musicStart"), object: nil)
         
     }

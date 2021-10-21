@@ -12,7 +12,7 @@
         <!--Main View Controller-->
         <scene sceneID="xKk-g5-0OR">
             <objects>
-                <viewController id="oRA-E8-bnL" customClass="MainViewController" customModule="containerTest" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="oRA-E8-bnL" customClass="MainViewController" customModule="MusicPlayer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Uke-pk-FxU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -53,7 +53,7 @@
         <!--Mini Player View Controller-->
         <scene sceneID="Kab-ZH-r6R">
             <objects>
-                <viewController id="JG3-Iw-pLv" customClass="MiniPlayerViewController" customModule="containerTest" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="JG3-Iw-pLv" customClass="MiniPlayerViewController" customModule="MusicPlayer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" alpha="0.75" contentMode="scaleToFill" id="bjE-8P-wIp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -125,7 +125,7 @@
         <!--List View Controller-->
         <scene sceneID="YMH-jW-kq8">
             <objects>
-                <viewController id="qOx-HE-hqr" customClass="ListViewController" customModule="containerTest" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="qOx-HE-hqr" customClass="ListViewController" customModule="MusicPlayer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yKe-nN-T91">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="636"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -181,7 +181,7 @@
         <!--Max Player View Controller-->
         <scene sceneID="eTG-ue-FA0">
             <objects>
-                <viewController storyboardIdentifier="playerVC" id="yCg-Uf-jq2" customClass="MaxPlayerViewController" customModule="containerTest" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="playerVC" id="yCg-Uf-jq2" customClass="MaxPlayerViewController" customModule="MusicPlayer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fV1-hD-Hyy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -260,12 +260,19 @@
                                             <action selector="changeSlider:" destination="yCg-Uf-jq2" eventType="valueChanged" id="6z4-kE-uN8"/>
                                         </connections>
                                     </slider>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n4m-RL-TVX">
+                                        <rect key="frame" x="186.33333333333334" y="310" width="41.333333333333343" height="20.333333333333314"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="FNY-GU-E8o" firstAttribute="top" secondItem="9UD-S9-Zwr" secondAttribute="bottom" constant="50" id="17A-cm-2GA"/>
                                     <constraint firstItem="S7h-em-7Oo" firstAttribute="top" secondItem="9Px-rm-acK" secondAttribute="top" constant="50" id="5kY-Wk-xGS"/>
                                     <constraint firstItem="4mr-Sl-mbW" firstAttribute="trailing" secondItem="A50-EF-DZc" secondAttribute="trailing" id="6IG-Oi-bvY"/>
+                                    <constraint firstItem="n4m-RL-TVX" firstAttribute="centerX" secondItem="9Px-rm-acK" secondAttribute="centerX" id="Mvn-OK-wbV"/>
                                     <constraint firstItem="FNY-GU-E8o" firstAttribute="trailing" secondItem="A50-EF-DZc" secondAttribute="trailing" id="SbQ-wo-fMM"/>
                                     <constraint firstItem="A50-EF-DZc" firstAttribute="centerX" secondItem="9Px-rm-acK" secondAttribute="centerX" id="Sym-sH-qhj"/>
                                     <constraint firstItem="5K7-nU-abu" firstAttribute="firstBaseline" secondItem="4mr-Sl-mbW" secondAttribute="baseline" id="Va3-rA-xVo"/>
@@ -273,6 +280,7 @@
                                     <constraint firstItem="S7h-em-7Oo" firstAttribute="centerX" secondItem="9Px-rm-acK" secondAttribute="centerX" id="cBM-Tw-Lba"/>
                                     <constraint firstItem="A50-EF-DZc" firstAttribute="top" secondItem="S7h-em-7Oo" secondAttribute="bottom" constant="50" id="ehx-bn-XWC"/>
                                     <constraint firstItem="FNY-GU-E8o" firstAttribute="leading" secondItem="A50-EF-DZc" secondAttribute="leading" id="enL-jh-Qyy"/>
+                                    <constraint firstItem="n4m-RL-TVX" firstAttribute="top" secondItem="S7h-em-7Oo" secondAttribute="bottom" constant="20" id="hb5-Sx-mF1"/>
                                     <constraint firstItem="9UD-S9-Zwr" firstAttribute="centerX" secondItem="9Px-rm-acK" secondAttribute="centerX" id="l9o-mi-W5d"/>
                                     <constraint firstItem="5K7-nU-abu" firstAttribute="leading" secondItem="A50-EF-DZc" secondAttribute="leading" id="uHo-h2-h60"/>
                                     <constraint firstItem="5K7-nU-abu" firstAttribute="top" secondItem="A50-EF-DZc" secondAttribute="bottom" constant="10" id="zCK-h6-8Nt"/>
@@ -295,6 +303,7 @@
                         <outlet property="playButton" destination="2bf-Xw-yLf" id="sOr-kV-rib"/>
                         <outlet property="slider" destination="A50-EF-DZc" id="JOs-gU-y5k"/>
                         <outlet property="songLengthLabel" destination="4mr-Sl-mbW" id="3Ho-DC-LrC"/>
+                        <outlet property="songTitle" destination="n4m-RL-TVX" id="TUw-8G-feI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ftQ-Zm-VR1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

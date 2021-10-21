@@ -4,14 +4,14 @@
 //
 //  Created by 林煜凱 on 10/17/21.
 //
-
+import MediaPlayer
 import UIKit
 
 class MainViewController: UIViewController {
     var miniPlayerVC: MiniPlayerViewController!
     var listVC: ListViewController!
-    var player: MusicPlayer?
-    
+    //var player: MusicPlayer?
+    var player =  MusicPlayer.shared
     override func viewDidLoad() {
         super.viewDidLoad()
        

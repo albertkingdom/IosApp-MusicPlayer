@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let rootVC = window?.rootViewController as! MainViewController
       
-        rootVC.player = MusicPlayer()
+        //rootVC.player = MusicPlayer()
   
     }
 
