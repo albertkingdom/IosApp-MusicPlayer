@@ -22,7 +22,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let rootVC = window?.rootViewController as! MainViewController
       
         //rootVC.player = MusicPlayer()
-  
+      
+        //restoration
+        if let userActivity = connectionOptions.userActivities.first ?? session.stateRestorationActivity {
+         
+            if let restoredSong = userActivity.currentSong {
+             
+                MusicPlayer.shared.setSongInfo(restoredSong)
+                MusicPlayer.shared.replacePlayerItem()
+            }
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -52,7 +61,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
+    func stateRestorationActivity(for scene: UIScene) ->
+       NSUserActivity? {
+           return MusicPlayer.shared.userActivityHistory
+    }
 
+    
 
 }
 

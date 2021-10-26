@@ -38,15 +38,21 @@ class MaxPlayerViewController: UIViewController {
         guard let player = player.player else {
             return
         }
-
+        
         switch player.timeControlStatus {
+           
         case .playing:
+
             playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-            player.pause()
+
+            self.player.stopPlay()
             NotificationCenter.default.post(name: Notification.Name("musicPause"), object: nil)
-        case .paused:
+        case .paused, .waitingToPlayAtSpecifiedRate:
+
             playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
-            player.play()
+
+            //self.player.replacePlayerItem()
+            self.player.startPlay()
             NotificationCenter.default.post(name: Notification.Name("musicStart"), object: nil)
         default: return
         }
@@ -60,45 +66,47 @@ class MaxPlayerViewController: UIViewController {
 
     }
     override func viewDidLoad() {
+        print("max player viewdidload")
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(onEndPlaySong), name: .AVPlayerItemDidPlayToEndTime, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onPauseOrPlay), name: Notification.Name("musicPause"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onPauseOrPlay), name: Notification.Name("musicStart"), object: nil)
-    
         configure()
         guard let player = player.player else {
             return
         }
     
-        timeObserver = player.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(1, preferredTimescale: 1), queue: DispatchQueue.main) { [unowned self] time in
+        timeObserver = player.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(1, preferredTimescale: 1), queue: DispatchQueue.main) { [weak self] time in
             if player.currentItem?.status == .readyToPlay {
                 let time : Float64 = CMTimeGetSeconds(player.currentTime());
                     //print("Current play time: \(time)")
-                    configureSlider(time)
-                currentTimeLabel.text = formatToTimeStr(timeInSec: Float(time))
+                self?.configureSlider(time)
+                self?.currentTimeLabel.text = self?.formatToTimeStr(timeInSec: Float(time))
 
             }
            
         }
 
     }
-    
+    override func viewWillLayoutSubviews() {
+        setGradientColor()
+    }
     func configureSlider(_ currentTime: Float64) {
         guard let duration = player.songDuration else { return }
         let percentage = Float(currentTime)/duration
         slider.setValue(Float(percentage), animated: true)
     }
     func configure() {
-        albumImage.image = player.getSongInfo()?.albumImage
-        playButton.tintColor = UIColor.black
+        if let songInfo = player.getSongInfo(), let image = UIImage(named: songInfo.albumImage) {
+        albumImage.image = image
+        }
+ 
         songTitle.text = player.getSongInfo()?.songTitle
     
         //let songLengthStr = formatToTimeStr(timeInSec: player.currentItem?.duration.seconds)
         let songLengthStr = formatToTimeStr(timeInSec: player.songDuration)
         songLengthLabel.text = songLengthStr
-                guard let player = player.player else {
-                    return
-                }
+        guard let player = player.player else { return }
         
         switch player.timeControlStatus {
         case .playing:
@@ -138,8 +146,20 @@ class MaxPlayerViewController: UIViewController {
         formater.unitsStyle = .positional
         return formater.string(from: Double(timeInSec)) ?? "--:--"
     }
-    override func viewWillDisappear(_ animated: Bool) {
+    func setGradientColor() {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = view.bounds
+        
+        let blueOne = UIColor(red: 0/255, green: 71/255, blue: 171/255, alpha: 1)
+        let blueTwo = UIColor(red: 0/255, green: 51/255, blue: 102/255, alpha: 1)
+        gradientLayer.colors = [blueOne.cgColor, blueTwo.cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
        
+        view.layer.insertSublayer(gradientLayer, at: 0)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+       print("max player villwilldisappear")
         // remove observer
         
         if let token = timeObserver {

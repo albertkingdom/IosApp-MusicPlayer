@@ -19,6 +19,10 @@
 		A1659C8F271BFDC1004010FA /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1659C8E271BFDC1004010FA /* ListViewController.swift */; };
 		A1659C91271C7301004010FA /* MaxPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1659C90271C7301004010FA /* MaxPlayerViewController.swift */; };
 		A1659CBE271F17B8004010FA /* Music in Resources */ = {isa = PBXBuildFile; fileRef = A1659CBD271F17B8004010FA /* Music */; };
+		A18AA40427265F140044450A /* TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18AA40327265F140044450A /* TopViewController.swift */; };
+		A18AA407272661E30044450A /* TopViewControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18AA406272661E30044450A /* TopViewControllerCell.swift */; };
+		A18AA4092726B3500044450A /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18AA4082726B3500044450A /* ListTableViewCell.swift */; };
+		A18AA40B272704050044450A /* Restoration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18AA40A272704050044450A /* Restoration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +40,10 @@
 		A1659C8E271BFDC1004010FA /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		A1659C90271C7301004010FA /* MaxPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxPlayerViewController.swift; sourceTree = "<group>"; };
 		A1659CBD271F17B8004010FA /* Music */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Music; path = MusicPlayer/Music; sourceTree = SOURCE_ROOT; };
+		A18AA40327265F140044450A /* TopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewController.swift; sourceTree = "<group>"; };
+		A18AA406272661E30044450A /* TopViewControllerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewControllerCell.swift; sourceTree = "<group>"; };
+		A18AA4082726B3500044450A /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
+		A18AA40A272704050044450A /* Restoration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restoration.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,11 +76,13 @@
 		A1659C66271BE762004010FA /* MusicPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				A18AA4052726619F0044450A /* View */,
 				A1659CBD271F17B8004010FA /* Music */,
 				A1659C81271BEC03004010FA /* View Controller */,
 				A1659C7D271BE961004010FA /* Model */,
 				A1659C67271BE762004010FA /* AppDelegate.swift */,
 				A1659C69271BE762004010FA /* SceneDelegate.swift */,
+				A18AA40A272704050044450A /* Restoration.swift */,
 				A1659C6D271BE762004010FA /* Main.storyboard */,
 				A1659C70271BE765004010FA /* Assets.xcassets */,
 				A1659C72271BE765004010FA /* LaunchScreen.storyboard */,
@@ -97,8 +107,18 @@
 				A1659C82271BEC20004010FA /* MiniPlayerViewController.swift */,
 				A1659C8E271BFDC1004010FA /* ListViewController.swift */,
 				A1659C90271C7301004010FA /* MaxPlayerViewController.swift */,
+				A18AA40327265F140044450A /* TopViewController.swift */,
 			);
 			path = "View Controller";
+			sourceTree = "<group>";
+		};
+		A18AA4052726619F0044450A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A18AA406272661E30044450A /* TopViewControllerCell.swift */,
+				A18AA4082726B3500044450A /* ListTableViewCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,12 +193,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A18AA4092726B3500044450A /* ListTableViewCell.swift in Sources */,
 				A1659C7C271BE8D0004010FA /* MusicPlayer.swift in Sources */,
+				A18AA40B272704050044450A /* Restoration.swift in Sources */,
 				A1659C6C271BE762004010FA /* MainViewController.swift in Sources */,
+				A18AA407272661E30044450A /* TopViewControllerCell.swift in Sources */,
 				A1659C91271C7301004010FA /* MaxPlayerViewController.swift in Sources */,
 				A1659C83271BEC20004010FA /* MiniPlayerViewController.swift in Sources */,
 				A1659C68271BE762004010FA /* AppDelegate.swift in Sources */,
 				A1659C80271BE9A3004010FA /* SongData.swift in Sources */,
+				A18AA40427265F140044450A /* TopViewController.swift in Sources */,
 				A1659C6A271BE762004010FA /* SceneDelegate.swift in Sources */,
 				A1659C8F271BFDC1004010FA /* ListViewController.swift in Sources */,
 			);
@@ -343,7 +367,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = albertkingdom.MusicPlayer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.albertkingdom.MusicPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -372,7 +396,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = albertkingdom.MusicPlayer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.albertkingdom.MusicPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

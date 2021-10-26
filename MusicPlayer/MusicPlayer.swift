@@ -9,6 +9,7 @@ import Foundation
 import MediaPlayer
 
 class MusicPlayer {
+    var userActivityHistory = NSUserActivity(activityType: "com.albertkingdom.MusicPlayer.currentSong")
     static var shared = MusicPlayer() //singleton
     var currentIndex: Int?
     var player: AVPlayer?
@@ -46,17 +47,18 @@ class MusicPlayer {
     }
     func replacePlayerItem(){
     
-        guard let url = songInfo?.songUrl else {
-            return
-        }
         
+        guard let fileName = songInfo?.fileName else { return }
+       
+        guard let url = Bundle.main.url(forResource: fileName, withExtension: "mp3", subdirectory: "Music") else { return }
+       
         playerItem = AVPlayerItem(url: url)
         player?.replaceCurrentItem(with: playerItem)
         
         guard let duration = playerItem?.asset.duration.seconds else { return }
         songDuration = Float(duration)
        
-        startPlay()
+        //startPlay()
         // reset notification music control info
         setupNotificationView()
     }
@@ -95,7 +97,7 @@ class MusicPlayer {
     // set up notification music controller view
     func setupNotificationView() {
       
-        guard let songInfo = songInfo else {
+        guard let songInfo = songInfo, let albumImage = UIImage(named: songInfo.albumImage) else {
             return
         }
        
@@ -103,8 +105,8 @@ class MusicPlayer {
         nowPlayingInfo[MPMediaItemPropertyArtist] = songInfo.singer
         nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = songDuration
         nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = CMTimeGetSeconds((player?.currentTime())!)
-        nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: songInfo.albumImage.size, requestHandler: { size in
-            return songInfo.albumImage
+        nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: albumImage.size, requestHandler: { size in
+            return albumImage
         })
         
         MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
