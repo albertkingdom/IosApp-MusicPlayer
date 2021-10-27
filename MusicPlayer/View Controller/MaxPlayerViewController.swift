@@ -51,7 +51,7 @@ class MaxPlayerViewController: UIViewController {
 
             playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
 
-            //self.player.replacePlayerItem()
+ 
             self.player.startPlay()
             NotificationCenter.default.post(name: Notification.Name("musicStart"), object: nil)
         default: return
@@ -66,20 +66,23 @@ class MaxPlayerViewController: UIViewController {
 
     }
     override func viewDidLoad() {
-        print("max player viewdidload")
+ 
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(onEndPlaySong), name: .AVPlayerItemDidPlayToEndTime, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onPauseOrPlay), name: Notification.Name("musicPause"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onPauseOrPlay), name: Notification.Name("musicStart"), object: nil)
         configure()
+        
+        
         guard let player = player.player else {
             return
         }
     
-        timeObserver = player.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(1, preferredTimescale: 1), queue: DispatchQueue.main) { [weak self] time in
+        timeObserver = player.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(1, preferredTimescale: 20), queue: DispatchQueue.main) { [weak self] time in
+
             if player.currentItem?.status == .readyToPlay {
                 let time : Float64 = CMTimeGetSeconds(player.currentTime());
-                    //print("Current play time: \(time)")
+
                 self?.configureSlider(time)
                 self?.currentTimeLabel.text = self?.formatToTimeStr(timeInSec: Float(time))
 
@@ -97,6 +100,12 @@ class MaxPlayerViewController: UIViewController {
         slider.setValue(Float(percentage), animated: true)
     }
     func configure() {
+        // setup time label and slider value when observer is not set up
+        let currentTime = player.player?.currentTime().seconds ?? 0
+        configureSlider(Float64(currentTime))
+        self.currentTimeLabel.text = self.formatToTimeStr(timeInSec: Float(currentTime))
+        
+        
         if let songInfo = player.getSongInfo(), let image = UIImage(named: songInfo.albumImage) {
         albumImage.image = image
         }
@@ -159,7 +168,7 @@ class MaxPlayerViewController: UIViewController {
         view.layer.insertSublayer(gradientLayer, at: 0)
     }
     override func viewWillDisappear(_ animated: Bool) {
-       print("max player villwilldisappear")
+
         // remove observer
         
         if let token = timeObserver {
